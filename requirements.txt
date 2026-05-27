@@ -1,0 +1,15 @@
+
+pandas
+numpy
+scikit-learn
+nltk
+spacy
+matplotlib
+seaborn
+wordcloud
+fastapi
+uvicorn
+joblib
+transformers
+torch
+jupyter

@@ -1,0 +1,10 @@
+
+complaint,department,sentiment
+Water supply not available for 2 days,Water,Critical
+Road has huge potholes,Roads,Negative
+Street lights are not working,Electricity,Neutral
+Garbage not collected,Sanitation,Critical
+Electricity outage since morning,Electricity,Critical
+Drainage blockage causing smell,Sanitation,Negative
+Broken road near school,Roads,Negative
+No clean water in society,Water,Negative
