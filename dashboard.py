@@ -30,6 +30,12 @@ if st.button("Analyze Complaint"):
         try:
             print("\n========== NEW COMPLAINT ==========")
             print(f"Complaint: {complaint}")
+            with open("complaint_logs.txt", "a") as file:
+                file.write(f"Complaint: {complaint}\n")
+                file.write(f"Department: {department}\n")
+                file.write(f"Sentiment: {sentiment}\n")
+                file.write(f"Priority: {priority_score}\n")
+                file.write("---------------------------------\n")
             # Prediction
             department = department_model.predict([complaint])[0]
             sentiment = sentiment_model.predict([complaint])[0]
