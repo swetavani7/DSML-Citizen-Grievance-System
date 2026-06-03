@@ -1,44 +1,48 @@
-
-from fastapi import FastAPI
-from pydantic import BaseModel
+from pathlib import Path
 import joblib
-
-from app.preprocessing import clean_text
+from fastapi import FastAPI
 
 app = FastAPI()
 
-department_model = joblib.load("models/department_model.pkl")
-sentiment_model = joblib.load("models/sentiment_model.pkl")
+BASE_DIR = Path(__file__).resolve().parent.parent
 
+department_model = joblib.load(
+    BASE_DIR / "models" / "department_classifier.pkl"
+)
 
-class ComplaintRequest(BaseModel):
-    complaint: str
-
+vectorizer = joblib.load(
+    BASE_DIR / "models" / "tfidf_vectorizer.pkl"
+)
 
 @app.get("/")
 def home():
-    return {"message": "Citizen Grievance NLP API Running"}
-
+    return {
+        "message": "Citizen Grievance API"
+    }
 
 @app.post("/predict")
-def predict(request: ComplaintRequest):
+def predict(data: dict):
 
-    cleaned = clean_text(request.complaint)
+    try:
+        complaint = data["complaint"]
 
-    department = department_model.predict([cleaned])[0]
-    sentiment = sentiment_model.predict([cleaned])[0]
+        print("Complaint:", complaint)
 
-    priority_map = {
-        "Positive": 1,
-        "Neutral": 3,
-        "Negative": 7,
-        "Critical": 10
-    }
+        vector = vectorizer.transform([complaint])
 
-    priority_score = priority_map.get(sentiment, 0)
+        print("Vector created")
 
-    return {
-        "department": department,
-        "sentiment": sentiment,
-        "priority_score": priority_score
-    }
+        department = department_model.predict(vector)[0]
+
+        print("Prediction:", department)
+
+        return {
+            "department": str(department)
+        }
+
+    except Exception as e:
+        print("ERROR:", str(e))
+
+        return {
+            "error": str(e)
+        }

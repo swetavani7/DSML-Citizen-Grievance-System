@@ -1,0 +1,11 @@
+complaint,department,sentiment,cleaned_text
+Water supply not available for 3 days,Water,Critical,water supply available day
+Street light not working,Roads,Negative,street light work
+Power outage in sector 10,Electricity,Critical,power outage sector
+Garbage not collected for a week,Sanitation,Negative,garbage collect week
+Water leakage near main road,Water,Negative,water leakage near main road
+Potholes causing traffic issues,Roads,Negative,pothole cause traffic issue
+Frequent electricity cuts,Electricity,Critical,frequent electricity cut
+Overflowing garbage bins,Sanitation,Negative,overflow garbage bin
+Water pressure is very low,Water,Neutral,water pressure low
+Broken road divider,Roads,Neutral,break road divider
